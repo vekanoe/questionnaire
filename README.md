@@ -1,38 +1,50 @@
 #### Разворот приложения:
 
-перейти в папке проекта 
-cd questionnaire
+перейти в папке проекта
+ 
+    cd questionnaire
+
 
 создать файл с локальными настройками
-touch main/locals2.py
+
+    touch main/locals2.py
+
 
 разместить в нём код
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'questionnaire_db',
-        'USER': 'q_user',
-        'PASSWORD': '123456',
-        'HOST': 'db',
+
+    DEBUG = True
+    ALLOWED_HOSTS = ['127.0.0.1']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'questionnaire_db',
+            'USER': 'q_user',
+            'PASSWORD': '123456',
+            'HOST': 'db',
+        }
     }
-}
 
 создать/запустить контейнеры
-docker-compose up -d  --build
 
-запустить миграции 
-docker-compose exec web python manage.py migrate
+    docker-compose up -d  --build
+
+
+запустить миграции
+ 
+    docker-compose exec web python manage.py migrate
+
 
 собрать статику
-docker-compose exec web python manage.py collectstatic
+
+    docker-compose exec web python manage.py collectstatic
 
 создать суперпользователя
-docker-compose exec web python manage.py createsuperuser
+
+    docker-compose exec web python manage.py createsuperuser
 
 запуск сервера
-docker-compose exec -d web python manage.py runserver 0.0.0.0:8000
+
+    docker-compose exec -d web python manage.py runserver 0.0.0.0:8000
 
 
 #### Админка для администратора системы:
