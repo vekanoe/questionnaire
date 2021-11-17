@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web:
+    container_name: dev_backend
+    build: .
+    restart: always
+    env_file: dev.env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+     - .:/app
+     - static_volume:/app/static
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+     - db
+  db:
+    container_name: dev_db
+    image: postgres:12.0-alpine
+    env_file: dev.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: q_user
+      POSTGRES_DB: questionnaire_db
+
+volumes:
+  static_volume:
+  postgres_data:
